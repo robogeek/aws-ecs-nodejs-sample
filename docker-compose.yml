@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+    nginx:
+        build: ./nginx
+        container_name: nginx
+        networks:
+            - thenet
+        ports:
+            - '80:80'
+    app:
+        build: ./app
+        container_name: app
+        networks:
+            - thenet
+        ports:
+            - '3000:3000'
+
+networks:
+    thenet:
