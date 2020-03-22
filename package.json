@@ -1,0 +1,13 @@
+{
+    "scripts": {
+        "build": "npm run build-app && npm run build-nginx",
+        "build-app": "cd app && docker build -t app:latest .",
+        "build-nginx": "cd nginx && docker build -t nginx:latest .",
+        "ecr-create-repos": "npm run ecr-create-app && npm run ecr-create-nginx",
+        "ecr-create-app": "cd app && aws ecr create-repository --profile $AWS_PROFILE --repository-name app --image-scanning-configuration scanOnPush=true --region us-west-2",
+        "ecr-create-nginx": "cd nginx && aws ecr create-repository --profile ${AWS_PROFILE} --repository-name nginx --image-scanning-configuration scanOnPush=true --region us-west-2",
+        "ecr-push-repos": "npm run ecr-push-app && npm run ecr-push-nginx",
+        "ecr-push-app": "cd app && docker push ${AWS_USER}.dkr.ecr.${AWS_REGION}.amazonaws.com/app",
+        "ecr-push-nginx": "cd nginx && docker push ${AWS_USER}.dkr.ecr.${AWS_REGION}.amazonaws.com/nginx"
+    }
+}
