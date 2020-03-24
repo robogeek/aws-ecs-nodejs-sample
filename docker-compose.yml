@@ -13,8 +13,9 @@ services:
         container_name: app
         networks:
             - thenet
-        ports:
-            - '3000:3000'
+        # Do not publish
+        # ports:
+        #     - '3000:3000'
 
 networks:
     thenet:

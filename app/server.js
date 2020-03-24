@@ -6,6 +6,7 @@ const os   = require('os');
 
 const server = http.createServer();
 server.on('request', (req, res) => {
+    console.log(req.url);
     res.end(
 `<html><head><title>Operating System Info</title></head>
 <body><h1>Operating System Info</h1>
