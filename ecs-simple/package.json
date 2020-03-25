@@ -1,0 +1,16 @@
+{
+    "scripts": {
+        "build": "npm run build-app && npm run build-nginx",
+        "build-app": "cd ../app && docker build -t app:latest .",
+        "build-nginx": "cd ../nginx-ecs-simple && docker build -t nginx-ecs-simple:latest .",
+        "ecr-create-repos": "npm run ecr-create-app && npm run ecr-create-nginx",
+        "ecr-create-app": "cd ../app && aws ecr create-repository --profile $AWS_PROFILE --repository-name app --image-scanning-configuration scanOnPush=true --region ${AWS_REGION}",
+        "ecr-create-nginx": "cd ../nginx-ecs-simple && aws ecr create-repository --profile ${AWS_PROFILE} --repository-name nginx-ecs-simple --image-scanning-configuration scanOnPush=true --region ${AWS_REGION}",
+        "ecr-tag-repos": "npm run ecr-tag-app && npm run ecr-tag-nginx",
+        "ecr-tag-app": "cd ../app && docker tag app:latest ${AWS_USER}.dkr.ecr.${AWS_REGION}.amazonaws.com/app:latest",
+        "ecr-tag-nginx": "cd ../nginx-ecs-simple && docker tag nginx:latest ${AWS_USER}.dkr.ecr.${AWS_REGION}.amazonaws.com/nginx-ecs-simple:latest",
+        "ecr-push-repos": "npm run ecr-push-app && npm run ecr-push-nginx",
+        "ecr-push-app": "cd ../app && docker push ${AWS_USER}.dkr.ecr.${AWS_REGION}.amazonaws.com/app:latest",
+        "ecr-push-nginx": "cd ../nginx-ecs-simple && docker push ${AWS_USER}.dkr.ecr.${AWS_REGION}.amazonaws.com/nginx-ecs-simple:latest"
+    }
+}
