@@ -1,7 +1,0 @@
-{
-    "scripts": {
-        "build": "npm run build-app && npm run build-nginx",
-        "build-app": "cd app && docker build -t app:latest .",
-        "build-nginx": "cd nginx && docker build -t nginx:latest ."
-    }
-}

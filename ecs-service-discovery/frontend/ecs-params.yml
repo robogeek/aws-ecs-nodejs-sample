@@ -1,0 +1,23 @@
+version: 1
+task_definition:
+    task_execution_role: ecsTaskExecutionRole
+    ecs_network_mode: awsvpc
+    task_size:
+        mem_limit: 0.5GB
+        cpu_limit: 256
+run_params:
+    network_configuration:
+        subnets:
+            - "subnet-06a17646410221759"
+            - "subnet-06185245307395aa7"
+        security_groups:
+            - "sg-0fdc2c18217651d0e"
+        assign_public_ip: ENABLED
+
+# service_discovery:
+#     container_name: nginx
+#     container_port: 80
+#     private_dns_namespace:
+#         vpc: "vpc-074dd73ec20a5df86"
+#         id: nginx
+#         name: tutorial

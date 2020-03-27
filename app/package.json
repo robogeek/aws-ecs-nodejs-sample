@@ -1,0 +1,8 @@
+{
+    "scripts": {
+        "build": "docker build -t app:latest .",
+        "create-repo": "aws ecr create-repository --profile ${AWS_PROFILE} --repository-name app --image-scanning-configuration scanOnPush=true --region ${AWS_REGION}",
+        "tag": "docker tag app:latest ${AWS_USER}.dkr.ecr.${AWS_REGION}.amazonaws.com/app:latest",
+        "push": "docker push ${AWS_USER}.dkr.ecr.${AWS_REGION}.amazonaws.com/app:latest"
+    }
+}

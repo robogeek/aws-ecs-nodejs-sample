@@ -1,16 +1,18 @@
 {
     "scripts": {
+        "docker-login": "aws ecr get-login-password --profile ${AWS_PROFILE} --region ${AWS_REGION} | docker login --username AWS --password-stdin ${AWS_USER}.dkr.ecr.${AWS_REGION}.amazonaws.com",
+        "ecr-repositories": "aws ecr describe-repositories --profile ${AWS_PROFILE} --repository-names app nginx-ecs-simple",
         "build": "npm run build-app && npm run build-nginx",
-        "build-app": "cd ../app && docker build -t app:latest .",
-        "build-nginx": "cd ../nginx-ecs-simple && docker build -t nginx-ecs-simple:latest .",
+        "build-app": "cd ../app && npm run build",
+        "build-nginx": "cd nginx-ecs-simple && npm run build",
         "ecr-create-repos": "npm run ecr-create-app && npm run ecr-create-nginx",
-        "ecr-create-app": "cd ../app && aws ecr create-repository --profile $AWS_PROFILE --repository-name app --image-scanning-configuration scanOnPush=true --region ${AWS_REGION}",
-        "ecr-create-nginx": "cd ../nginx-ecs-simple && aws ecr create-repository --profile ${AWS_PROFILE} --repository-name nginx-ecs-simple --image-scanning-configuration scanOnPush=true --region ${AWS_REGION}",
+        "ecr-create-app": "cd ../app && npm run create-repo",
+        "ecr-create-nginx": "cd nginx-ecs-simple && npm run create-repo",
         "ecr-tag-repos": "npm run ecr-tag-app && npm run ecr-tag-nginx",
-        "ecr-tag-app": "cd ../app && docker tag app:latest ${AWS_USER}.dkr.ecr.${AWS_REGION}.amazonaws.com/app:latest",
-        "ecr-tag-nginx": "cd ../nginx-ecs-simple && docker tag nginx:latest ${AWS_USER}.dkr.ecr.${AWS_REGION}.amazonaws.com/nginx-ecs-simple:latest",
+        "ecr-tag-app": "cd ../app && npm run tag",
+        "ecr-tag-nginx": "cd nginx-ecs-simple && npm run tag",
         "ecr-push-repos": "npm run ecr-push-app && npm run ecr-push-nginx",
-        "ecr-push-app": "cd ../app && docker push ${AWS_USER}.dkr.ecr.${AWS_REGION}.amazonaws.com/app:latest",
-        "ecr-push-nginx": "cd ../nginx-ecs-simple && docker push ${AWS_USER}.dkr.ecr.${AWS_REGION}.amazonaws.com/nginx-ecs-simple:latest"
+        "ecr-push-app": "cd ../app && npm run push",
+        "ecr-push-nginx": "cd nginx-ecs-simple && npm run push"
     }
 }

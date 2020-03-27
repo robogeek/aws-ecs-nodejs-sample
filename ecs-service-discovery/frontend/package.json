@@ -1,0 +1,8 @@
+{
+    "scripts": {
+        "build": "cd ../../nginx-ecs-service-discovery && docker build -t nginx-ecs-service-discovery:latest .",
+        "ecr-create-repo": "cd ../../nginx-ecs-service-discovery && aws ecr create-repository --profile ${AWS_PROFILE} --repository-name nginx-ecs-service-discovery --image-scanning-configuration scanOnPush=true --region ${AWS_REGION}",
+        "ecr-tag-repo": "cd ../../nginx-ecs-service-discovery && docker tag nginx:latest ${AWS_USER}.dkr.ecr.${AWS_REGION}.amazonaws.com/nginx-ecs-service-discovery:latest",
+        "ecr-push-repo": "cd ../../nginx-ecs-service-discovery && docker push ${AWS_USER}.dkr.ecr.${AWS_REGION}.amazonaws.com/nginx-ecs-service-discovery:latest"
+    }
+}
