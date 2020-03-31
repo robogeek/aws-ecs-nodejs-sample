@@ -1,0 +1,18 @@
+{
+    "scripts": {
+        "docker-login": "aws ecr get-login-password --profile ${AWS_PROFILE} --region ${AWS_REGION} | docker login --username AWS --password-stdin ${AWS_USER}.dkr.ecr.${AWS_REGION}.amazonaws.com",
+        "ecr-repositories": "aws ecr describe-repositories --profile ${AWS_PROFILE} --repository-names app nginx-ecs-terraform",
+        "build": "npm run build-app && npm run build-nginx",
+        "build-app": "cd ../app && npm run build",
+        "build-nginx": "cd nginx && npm run build",
+        "ecr-create-repos": "npm run ecr-create-app && npm run ecr-create-nginx",
+        "ecr-create-app": "cd ../app && npm run create-repo",
+        "ecr-create-nginx": "cd nginx && npm run create-repo",
+        "ecr-tag-repos": "npm run ecr-tag-app && npm run ecr-tag-nginx",
+        "ecr-tag-app": "cd ../app && npm run tag",
+        "ecr-tag-nginx": "cd nginx && npm run tag",
+        "ecr-push-repos": "npm run ecr-push-app && npm run ecr-push-nginx",
+        "ecr-push-app": "cd ../app && npm run push",
+        "ecr-push-nginx": "cd nginx && npm run push"
+    }
+}

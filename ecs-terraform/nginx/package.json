@@ -1,0 +1,8 @@
+{
+    "scripts": {
+        "build": "docker build -t nginx-ecs-terraform:latest .",
+        "create-repo": "aws ecr create-repository --profile ${AWS_PROFILE} --repository-name nginx-ecs-terraform --image-scanning-configuration scanOnPush=true --region ${AWS_REGION}",
+        "tag": "docker tag nginx:latest ${AWS_USER}.dkr.ecr.${AWS_REGION}.amazonaws.com/nginx-ecs-terraform:latest",
+        "push": "docker push ${AWS_USER}.dkr.ecr.${AWS_REGION}.amazonaws.com/nginx-ecs-terraform:latest"
+    }
+}
