@@ -7,12 +7,16 @@ The contents are:
 * `local` - A Docker Compose file for launching the two services on the local machine
 * `ecs-simple` - A simple deployment of the stack to AWS ECS using a `docker-compose.yml` and `ecs-params.yml`
     * `nginx-ecs-simple` - The version of the `nginx` service to be used in the `ecs-simple` scenario
-* `ecs-service-discovery` - A two-service deployment to AWS ECS meant to explore how Service Discovery works
+* `ecs-terraform` an example of using Terraform to deploy the stack to AWS ECS
+    * `nginx` An implementation of the `nginx` service for this
+* `ecs-service-discovery` - A two-service deployment to AWS ECS meant to explore how Service Discovery works THIS EXAMPLE DOES NOT YET WORK
     * `backend` - An implementation of the `app` service as an ECS Service, defined using a Docker Compose file
     * `frontend` - An implementation of the `nginx` service as an ECS Service, defined using a Docker Compose file
     * `nginx-ecs-service-discovery` The version of the `nginx` service to be used on ECS
 
 The `ecs-simple` case is a simple AWS ECS Fargate cluster containing the two services.
+
+The `ecs-terraform` case works directly with the AWS infrastructure, while using Terraform to do so.  This is different from the `ecs-simple` example which relies on a Docker Compose file.  
 
 The `ecs-service-discovery` is an attempt to deploy `app` and `nginx` as two separate services on ECS, and to have `nginx` find `app` using Service Discovery.  Unfortunately this example does not yet work.
 
