@@ -15,7 +15,7 @@ resource "aws_ecs_task_definition" "nginx" {
         [
             {
                 name = "nginx"
-                image = var.nginx_image
+                image = data.aws_ecr_repository.nginx.repository_url
                 cpu = var.nginx_fargate_cpu
                 memory = var.nginx_fargate_memory
                 networkMode = "awsvpc"
@@ -36,7 +36,7 @@ resource "aws_ecs_task_definition" "nginx" {
             },
             {
                 name = "app"
-                image = var.app_image
+                image = data.aws_ecr_repository.app.repository_url
                 cpu = var.app_fargate_cpu
                 memory = var.app_fargate_memory
                 networkMode = "awsvpc"
