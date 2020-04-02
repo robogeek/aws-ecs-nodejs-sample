@@ -39,7 +39,7 @@ variable "nginx_port" {
 
 variable "nginx_count" {
   description = "Number of NGINX containers to run"
-  default     = 3
+  default     = 1
 }
 
 variable "nginx_fargate_cpu" {

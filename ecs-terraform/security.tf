@@ -8,11 +8,10 @@ resource "aws_security_group" "lb" {
 
   ingress {
     protocol    = "tcp"
-    from_port   = var.nginx_port
+    from_port   = 0
     to_port     = var.nginx_port
     cidr_blocks = ["0.0.0.0/0"]
   }
-
   egress {
     protocol    = "-1"
     from_port   = 0
@@ -28,9 +27,9 @@ resource "aws_security_group" "nginx_task" {
 
   ingress {
     protocol        = "tcp"
-    from_port       = var.nginx_port
+    from_port       = 0
     to_port         = var.nginx_port
-    security_groups = [aws_security_group.lb.id]
+    cidr_blocks     = ["0.0.0.0/0"]
   }
 
   egress {
@@ -43,14 +42,14 @@ resource "aws_security_group" "nginx_task" {
 
 resource "aws_security_group" "app_task" {
   name        = "${var.ecs_service_name}-app-task-security-group"
-  description = "allow inbound access to the Application task from the ALB only"
+  description = "allow inbound access to the Application task from NGINX"
   vpc_id      = aws_vpc.main.id
 
   ingress {
-    protocol        = "tcp"
-    from_port       = var.app_port
-    to_port         = var.app_port
-    security_groups = [aws_security_group.lb.id]
+    protocol    = "tcp"
+    from_port   = 0
+    to_port     = var.app_port
+    cidr_blocks = [ aws_vpc.main.cidr_block ]
   }
 
   egress {
