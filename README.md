@@ -20,6 +20,8 @@ The `ecs-terraform` case works directly with the AWS infrastructure, while using
 
 The `ecs-service-discovery` is an attempt to deploy `app` and `nginx` as two separate services on ECS, and to have `nginx` find `app` using Service Discovery.  Unfortunately this example does not yet work.
 
+To see an implementation of Service Discovery, the `ecs-terraform` example implements that feature.
+
 For tutorials on using these containers, see:
 
 * [A simple multi-tier Node.js and Nginx deployment using Docker](https://techsparx.com/nodejs/docker/simple-node-docker-app.html)
