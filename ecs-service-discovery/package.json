@@ -15,7 +15,7 @@
         "ecr-push-app": "cd ../app && npm run push",
         "ecr-push-nginx": "cd nginx-ecs-service-discovery && npm run push",
         "ecs-configure": "ecs-cli configure --cluster ecs-service-discovery-stack --default-launch-type FARGATE --config-name  ecs-service-discovery-stack ",
-        "ecs-configure-profile": "ecs-cli configure profile --access-key AKIARNV5BY3NJIAHT6PE --secret-key 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 --profile-name ecs-service-discovery-stack",
+        "ecs-configure-profile": "ecs-cli configure profile --access-key ${AWS_ACCESS_KEY} --secret-key ${AWS_SECRET_KEY} --profile-name ecs-service-discovery-stack",
         "cluster-create": "ecs-cli up --cluster-config ecs-service-discovery-stack --ecs-profile ecs-service-discovery-stack --capability-iam --force",
         "cluster-create-old": "ecs-cli up --cluster-config ecs-service-discovery-stack --ecs-profile ecs-service-discovery-stack --keypair notes-app-key-pair --instance-type t2.micro --capability-iam --force --size 2",
         "cluster-status": "ecs-cli ps --cluster-config ecs-service-discovery-stack --ecs-profile ecs-service-discovery-stack",
